@@ -12,10 +12,13 @@ import { FormsModule } from '@angular/forms';
 import { ProductosComponent } from './productos/productos.component'
 import { ProductoService } from './productos/producto.service';
 import { InicioComponent } from './inicio/inicio.component';
+import { LoginComponent } from './login/login.component';
+import { RestapiService } from './login/restapi.service';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
   {path: 'inicio', component: InicioComponent},
   {path: 'nextprod', component: NextprodComponent},
   {path: 'productos', component: ProductosComponent},
@@ -31,7 +34,8 @@ const routes: Routes = [
     NextprodComponent,
     FormComponent,
     ProductosComponent,
-    InicioComponent
+    InicioComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ProductoService],
+  providers: [RestapiService,ProductoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
