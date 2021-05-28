@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestapiService } from './restapi.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     let resp = this.service.login(this.username, this.password);
     resp.subscribe(data => {
       this.message = data;
+      localStorage.setItem("message", String(this.message));
      this.router.navigate(["/inicio"])
     });
   }

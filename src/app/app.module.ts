@@ -14,16 +14,17 @@ import { ProductoService } from './productos/producto.service';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { RestapiService } from './login/restapi.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'inicio', component: InicioComponent},
-  {path: 'nextprod', component: NextprodComponent},
-  {path: 'productos', component: ProductosComponent},
-  {path: 'productos/form', component: FormComponent},
-  {path: 'productos/form/:id', component: FormComponent}
+  {path: 'inicio', component: InicioComponent,canActivate:[AuthGuard]},
+  {path: 'nextprod', component: NextprodComponent,canActivate:[AuthGuard]},
+  {path: 'productos', component: ProductosComponent,canActivate:[AuthGuard]},
+  {path: 'productos/form', component: FormComponent,canActivate:[AuthGuard]},
+  {path: 'productos/form/:id', component: FormComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({
@@ -43,7 +44,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [RestapiService,ProductoService],
+  providers: [RestapiService,LoginComponent,AuthGuard,ProductoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
